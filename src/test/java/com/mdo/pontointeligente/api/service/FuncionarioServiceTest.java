@@ -33,8 +33,6 @@ public class FuncionarioServiceTest {
 	@Autowired
 	private FuncionarioService funcionarioService;
 	
-	
-	
 	@Before
 	public void setUp() throws Exception {
 		// criar os mock para as chamatas que vamos usar. do repository
@@ -72,6 +70,7 @@ public class FuncionarioServiceTest {
 		Optional<Funcionario> funcionario =  this.funcionarioService.findByCpf("00704907160");
 		assertTrue(funcionario.isPresent());
 	}
+	
 	
 	
 }

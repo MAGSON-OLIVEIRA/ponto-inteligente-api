@@ -23,7 +23,7 @@ public interface FuncionarioService {
 	 * @param email
 	 * @return
 	 */
-	Optional<Funcionario> findByCpfOrEmail(String cpf, String email);
+//	Optional<Funcionario> findByCpfOrEmail(String cpf, String email);
 
 	/**
 	 * Salvar funcionario
