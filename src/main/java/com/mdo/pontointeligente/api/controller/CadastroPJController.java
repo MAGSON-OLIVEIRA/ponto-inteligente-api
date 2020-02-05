@@ -11,13 +11,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mdo.pontointeligente.api.dto.CadastroPJDto;
+import com.mdo.pontointeligente.api.dto.EmpresaDto;
 import com.mdo.pontointeligente.api.entities.Empresa;
 import com.mdo.pontointeligente.api.entities.Funcionario;
 import com.mdo.pontointeligente.api.enums.PerfilEnum;
@@ -65,15 +67,20 @@ public class CadastroPJController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@PutMapping("/id")
-	public ResponseEntity<Response<CadastroPJDto>> list(Long id){
-		Response<CadastroPJDto> response = new Response<CadastroPJDto>();
-		Funcionario funcionario = this.funcionarioService.buscarPorId(id).get();
-		CadastroPJDto cadastroPJDto = convertFuncionarioDto(funcionario);
-		response.setData(cadastroPJDto);
+	@GetMapping(value = "/cnpj/{cnpj}")
+	public ResponseEntity<Response<EmpresaDto>> getEmpresa(@PathVariable("cnpj") String cnpj){
+		Response<EmpresaDto> response = new Response<EmpresaDto>();
+		Empresa empresa = empresaService.buscarPorCnpj(cnpj).get();
+
+		response.setData(extractedEmrpesaDto(empresa));
 		return ResponseEntity.ok(response);
 		
 	}
+	private EmpresaDto extractedEmrpesaDto(Empresa empresa) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	private CadastroPJDto convertFuncionarioDto(Funcionario funcionario) {
 		CadastroPJDto cadastroPJDto = new CadastroPJDto();
 		cadastroPJDto.setId(funcionario.getId());
