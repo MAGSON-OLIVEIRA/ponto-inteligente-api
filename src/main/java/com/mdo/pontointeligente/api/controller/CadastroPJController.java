@@ -67,31 +67,6 @@ public class CadastroPJController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping(value = "/cnpj/{cnpj}")
-	public ResponseEntity<Response<EmpresaDto>> getEmpresa(@PathVariable("cnpj") String cnpj){
-		Response<EmpresaDto> response = new Response<EmpresaDto>();
-		Empresa empresa = empresaService.buscarPorCnpj(cnpj).get();
-
-		response.setData(extractedEmrpesaDto(empresa));
-		return ResponseEntity.ok(response);
-		
-	}
-	private EmpresaDto extractedEmrpesaDto(Empresa empresa) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private CadastroPJDto convertFuncionarioDto(Funcionario funcionario) {
-		CadastroPJDto cadastroPJDto = new CadastroPJDto();
-		cadastroPJDto.setId(funcionario.getId());
-		cadastroPJDto.setNome(funcionario.getNome());
-		cadastroPJDto.setEmail(funcionario.getEmail());
-		cadastroPJDto.setCpf(funcionario.getCpf());
-		cadastroPJDto.setSenha(funcionario.getSenha());
-		cadastroPJDto.setCnpj(funcionario.getEmpresa().getCnpj());
-		cadastroPJDto.setRazaoSocial(funcionario.getEmpresa().getRazaoSocial());
-		return cadastroPJDto;
-	}
 
 	private Empresa converterDtoParaEmpresa(CadastroPJDto cadastroPJDto) {
 		Empresa empresa = new Empresa();
