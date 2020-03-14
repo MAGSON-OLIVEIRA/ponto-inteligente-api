@@ -5,11 +5,3 @@ before_install:
   - chmod +x mvnw
 dist: trusty
 
-addons:
-  sonarcloud:
-    organization: "magson-oliveira" # the key of the org you chose at step #3
-    token:
-      secure: "d175c70ab7d450db8dbfde89cc08bc360931bec5" # encrypted value of your token
-script:
-  # other script steps might be done before running the actual analysis
-  - sonar-scanner
