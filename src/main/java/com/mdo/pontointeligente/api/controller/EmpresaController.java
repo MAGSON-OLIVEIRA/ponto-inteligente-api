@@ -44,7 +44,6 @@ public class EmpresaController {
 		}
 		response.setData(extractedEmrpesaDto(empresa.get()));
 		return ResponseEntity.ok(response);
-		
 	}
 	private EmpresaDto extractedEmrpesaDto(Empresa empresa) {	
 		EmpresaDto dtoEmpresa = new EmpresaDto();

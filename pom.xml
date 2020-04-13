@@ -5,7 +5,7 @@
 	
 	<groupId>com.mdo</groupId>
 	<artifactId>ponto-inteligente</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
 	<name>PontoInteligenteApi</name>
