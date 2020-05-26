@@ -25,7 +25,7 @@ import com.mdo.pontointeligente.api.services.EmpresaService;
 @RunWith(SpringRunner.class)
 @SpringBootTest // criar o contexto sprinboot
 @ActiveProfiles("test") // habilitar configuração de test
-@AutoConfigureMockMvc // adicionado a parte web, foi adicionado um contexto web.
+@AutoConfigureMockMvc // adicionado a parte web, foi adicionado um contexto web. novo contexto web
 public class EmpresaControllerTest {
 
 	// obter uma instancia mockmvc
@@ -33,10 +33,10 @@ public class EmpresaControllerTest {
 	@Autowired
 	private MockMvc mvc;
 	
-	@MockBean
+	@MockBean // mocar a empresa sevice
 	private EmpresaService empresaService;
 	
-	private static final String BUSCAR_EMPRESA_CNPJ_URL = "/api/empresas/cnpj/";
+	private static final String BUSCAR_EMPRESA_CNPJ_URL = "/api/empresas/cnpj/";   // url pra busca por cnpj
 	private static final Long ID = Long.valueOf(1);
 	private static final String CNPJ="07943503000140";
 	private static final String RAZAO_SOCIAL = "OK EMPRESA";
@@ -45,25 +45,27 @@ public class EmpresaControllerTest {
 	@Test
 	public void testBuscarEmpresaCnpjInvalidoValido()throws Exception{
 		// Optional.empty para simular um retorno que não foi encontrado nada. 
-		BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString())).willReturn(Optional.empty());
+		BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString())).willReturn(Optional.empty()); // sumular o retorno vazio. 
+		
+		// moc o perform -> execute 
 		mvc.perform(MockMvcRequestBuilders.get(BUSCAR_EMPRESA_CNPJ_URL+CNPJ).accept(MediaType.APPLICATION_JSON))
-					.andExpect(status().isBadRequest())
-					.andExpect(jsonPath("$.errors").value(VALUE_MSN+CNPJ));
+					.andExpect(status().isBadRequest())  // defino que o retorno é um badRequest 400  
+					.andExpect(jsonPath("$.errors").value(VALUE_MSN+CNPJ)); // jsonPath query em json para acessar o erro do retorno com erro. 
 	}
 	
 	@Test
 	public void testBuscarCNPJValido()throws Exception{
 		// Obter uma empresa no retorno para realizar o buscar de uma empresa valida. 
 		BDDMockito.given(this.empresaService.buscarPorCnpj(Mockito.anyString()))
-							.willReturn(Optional.of(this.obterEmpresa()));
+							.willReturn(Optional.of(this.obterEmpresa())); // retorna o objeto carregado no obterEmpresa
 		
 		mvc.perform(MockMvcRequestBuilders.get(BUSCAR_EMPRESA_CNPJ_URL+CNPJ)
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.data.id").value(ID))
+				.andExpect(status().isOk()) // primeira verificar ok defino com 200 
+				.andExpect(jsonPath("$.data.id").value(ID)) // pegar o valor via jsonPath query 
 				.andExpect(jsonPath("$.data.razaoSocial").value(RAZAO_SOCIAL))
 				.andExpect(jsonPath("$.data.cnpj").value(CNPJ))
-				.andExpect(jsonPath("$.errors").isEmpty());
+				.andExpect(jsonPath("$.errors").isEmpty()); // definindo o erro como vazio
 	}
 
 	private Empresa obterEmpresa() {

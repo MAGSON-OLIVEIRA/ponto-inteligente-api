@@ -33,8 +33,14 @@ public class EmpresaController {
 		
 	}
 
+	/**
+	 * 
+	 * @param cnpj
+	 * @return
+	 */
 	@GetMapping(value = "/cnpj/{cnpj}")
-	public ResponseEntity<Response<EmpresaDto>> getEmpresa(@PathVariable("cnpj") String cnpj){
+	public ResponseEntity<Response<EmpresaDto>> getEmpresaPorCnpj(@PathVariable("cnpj") String cnpj){
+		log.info("Buscando empresa por cnpj {}"+ cnpj);
 		Response<EmpresaDto> response = new Response<EmpresaDto>();
 		Optional<Empresa> empresa = empresaService.buscarPorCnpj(cnpj);
 		if(!empresa.isPresent()) {
