@@ -16,7 +16,7 @@ public class FuncionarioDto {
 	private Optional<String> qtdHorasTravalhoDia = Optional.empty();
 	private Optional<String> qtdHorasAlmoco = Optional.empty();
 
-	FuncionarioDto(){
+	public FuncionarioDto(){
 		
 	}
 
@@ -29,7 +29,7 @@ public class FuncionarioDto {
 	}
 
 	@NotEmpty(message = "Nome não pode ser vazio.")
-	@Length(min=3, max=300, message = "")
+	@Length(min=3, max=200, message = "Nome deve conter entre 3 e 200 caracteres.")
 	public String getNome() {
 		return nome;
 	}
@@ -39,8 +39,8 @@ public class FuncionarioDto {
 	}
 
 	@NotEmpty(message = "Email não pode ser vazio.")
-	@Length(min=5, max = 200, message = "Email deve ser infomado")
-	@Email(message="Email inválido")
+	@Length(min=5, max = 200, message = "Email deve conter entre 5 e 200 caracteres.")
+	@Email(message="E-mail inválido")
 	public String getEmail() {
 		return email;
 	}
@@ -48,7 +48,7 @@ public class FuncionarioDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	public Optional<String> getSenha() {
 		return senha;
 	}
