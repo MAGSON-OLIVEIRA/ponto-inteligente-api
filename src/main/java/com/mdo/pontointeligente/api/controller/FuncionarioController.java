@@ -25,7 +25,7 @@ import com.mdo.pontointeligente.api.services.FuncionarioService;
 import com.mdo.pontointeligente.api.utils.PasswordUtils;
 
 @RestController   // anotação controler
-@RequestMapping("/app/funcionarios") // mapeado 
+@RequestMapping("/api/funcionarios") // mapeado 
 @CrossOrigin("*")
 public class FuncionarioController {
 	
