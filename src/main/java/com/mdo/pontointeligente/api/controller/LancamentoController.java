@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mdo.pontointeligente.api.dto.LancamentoDto;
@@ -131,7 +131,14 @@ public class LancamentoController {
 	}
 	
 
-	
+	/**
+	 * 
+	 * @param id
+	 * @param lancamentoDto
+	 * @param result
+	 * @return
+	 * @throws ParseException
+	 */
 	@PutMapping(value="/{id}")
 	public ResponseEntity<Response<LancamentoDto>> atualizar(@PathVariable("id") Long id,
 			@Valid @RequestBody LancamentoDto lancamentoDto, BindingResult result
@@ -153,6 +160,25 @@ public class LancamentoController {
 		return ResponseEntity.ok(response);
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@DeleteMapping(value="/{id}")
+	public ResponseEntity<Response<String>> remover(@PathVariable("id") Long id){
+		log.info("Remover lançamento {}", id);
+		Response<String> response = new Response<String>();
+		Optional<Lancamento> lancamento = this.lancamentoService.burcarPorId(id);
+		
+		if(!lancamento.isPresent()) {
+			log.info("Codigo invalido, erro remover registro. {}", id);
+			response.getErrors().add("Erro remover lançamento"+id);
+			return ResponseEntity.badRequest().body(response);
+		}
+		this.lancamentoService.remover(id);
+		return ResponseEntity.ok(new Response<String>());
+	}
 	
 	/**
 	 * 
@@ -189,6 +215,11 @@ public class LancamentoController {
 	}
 
 
+	/**
+	 * 
+	 * @param lancamentoDto
+	 * @param result
+	 */
 	private void validarFuncionario(LancamentoDto lancamentoDto, BindingResult result) {
 		if(lancamentoDto.getFuncionarioId()==null) {
 			result.addError(new ObjectError("funcionario","Funcionário não informado"));
@@ -216,7 +247,7 @@ public class LancamentoController {
 		lancamentoDto.setDescricao(lancamento.getDescricao());
 		lancamentoDto.setLocalizacao(lancamento.getLocalizacao());
 		lancamentoDto.setFuncionarioId(lancamento.getFuncionario().getId());
-		return null;
+		return lancamentoDto;
 	}
 	
 
