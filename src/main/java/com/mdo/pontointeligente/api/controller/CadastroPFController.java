@@ -24,6 +24,7 @@ import com.mdo.pontointeligente.api.enums.PerfilEnum;
 import com.mdo.pontointeligente.api.response.Response;
 import com.mdo.pontointeligente.api.services.EmpresaService;
 import com.mdo.pontointeligente.api.services.FuncionarioService;
+import com.mdo.pontointeligente.api.utils.PasswordUtils;
 
 @RestController
 @RequestMapping("api/cadastro-pf")
@@ -81,7 +82,7 @@ public class CadastroPFController {
 		funcionario.setCpf(dto.getCpf());
 		funcionario.setEmail(dto.getEmail());
 		funcionario.setNome(dto.getNome());
-		funcionario.setSenha(dto.getSenha());
+		funcionario.setSenha(PasswordUtils.gerarBCrypt(dto.getSenha()));
 		funcionario.setPerfil(PerfilEnum.ROLE_USUARIO);
 		dto.getValorHora().ifPresent(valor -> funcionario.setValorHora(new BigDecimal(valor)));
 		dto.getQtdHorasAlmoco().ifPresent(valor -> funcionario.setQtdHorasAlmoco(Float.parseFloat(valor)));

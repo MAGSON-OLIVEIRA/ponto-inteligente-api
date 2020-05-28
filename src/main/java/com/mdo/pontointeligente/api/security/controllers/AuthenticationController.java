@@ -37,7 +37,7 @@ public class AuthenticationController {
 	private static final String TOKEN_HEADER = "Authorization";
 	private static final String BEARER_PREFIX = "Bearer ";
 
-	
+	@Autowired
 	private AuthenticationManager authenticationManager;
 
 	@Autowired

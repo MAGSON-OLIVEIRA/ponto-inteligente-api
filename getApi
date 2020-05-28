@@ -1,0 +1,75 @@
+chamadas. api
+
+put http://localhost:8080/app/funcionarios/2
+{
+  "nome": "Teste teste",
+  "cnpj": "86445822000606",
+  "email": "email3@email.com",
+  "qtdHorasTravalhoDia":"2.5",
+  "valorHora": 70
+}
+
+post http://localhost:8080/api/cadastrar-pj/salvar
+{
+    "data": {
+        "id": null,
+        "nome": "ADMIN",
+        "email": "admin@admin.com",
+        "senha": "admin",
+        "cpf": "69357533095",
+        "razaoSocial": "PRINCIPAL",
+        "cnpj": "69633918000174"
+    },
+    "errors": []
+}
+
+post http://localhost:8080/api/cadastro-pf
+{
+  "cnpj": "69633918000174",
+  "cpf": "42244326098",
+  "email": "usuario@usuario.com",
+
+  "nome": "Usuario",
+  "qtdHorasAlmoco":"1",
+  "qtdHorasTrabalhadaDia":"2",
+  "senha": "123",
+  "valorHora": 2
+}
+
+lancamento
+get http://localhost:8080/api/lancamentos/funcionario/2?pag=0&dir=ASC
+delete http://localhost:8080/api/lancamentos/8
+post http://localhost:8080/api/lancamentos
+{
+  "data": "2017-07-18 17:30:00",
+  "tipo": "TERMINO_TRABALHO",
+  "descricao": "TERMINO_TRABALHO",
+  "localizacao":"7.23423,2.12312",
+  "funcionarioId": "2"
+}
+put http://localhost:8080/api/lancamentos/6
+{
+  "data": "2017-07-18 17:30:00",
+  "tipo": "TERMINO_TRABALHO",
+  "descricao": "TERMINO_TRABALHO",
+  "localizacao":"11.23423,2.12312",
+  "funcionarioId": "2"
+}
+
+
+http://localhost:8080/auth
+
+{
+	"email": "usuario@usuario.com",
+	"senha": "123"
+}
+
+{
+	"email": "admin@admin.com",
+	"senha": "admin"
+}
+
+
+
+
+
