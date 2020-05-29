@@ -2,6 +2,7 @@ package com.mdo.pontointeligente.api.services;
 
 import java.util.Optional;
 
+import com.mdo.pontointeligente.api.entities.Empresa;
 import com.mdo.pontointeligente.api.entities.Funcionario;
 
 public interface FuncionarioService {

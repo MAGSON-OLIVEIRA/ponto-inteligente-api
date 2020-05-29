@@ -2,6 +2,7 @@ package com.mdo.pontointeligente.api.controller;
 
 import java.util.Date;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -46,6 +47,7 @@ public class CadastroPJController {
 	}
 	
 	@PostMapping("/salvar")
+	@Transactional
 	public ResponseEntity<Response<CadastroPJDto>> cadastrar(@Valid @RequestBody CadastroPJDto cadastroPJDto,
 			BindingResult result) {
 		log.info("Cadastro P.J. : {}", cadastroPJDto.toString());
