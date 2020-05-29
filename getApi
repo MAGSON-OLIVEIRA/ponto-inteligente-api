@@ -60,6 +60,34 @@ put http://localhost:8080/api/lancamentos/6
   "funcionarioId": "2"
 }
 
+CHAMADA HEROKU
+POST https://safe-waters-52516.herokuapp.com/api/lancamentos
+
+{
+  "data": "2017-07-18 17:30:00",
+  "tipo": "TERMINO_TRABALHO",
+  "descricao": "TERMINO_TRABALHO",
+  "localizacao":"7.23423,2.12312",
+  "funcionarioId": "21"
+}
+
+GET https://safe-waters-52516.herokuapp.com/api/lancamentos/funcionario/21?pag=1&dir=ASC
+
+POST https://safe-waters-52516.herokuapp.com/api/cadastro-pf
+{
+  "cnpj": "69633918000174",
+  "cpf": "42244326098",
+  "email": "usuario@usuario.com",
+
+  "nome": "Usuario",
+  "qtdHorasAlmoco":"1",
+  "qtdHorasTrabalhadaDia":"2",
+  "senha": "123",
+  "valorHora": 2
+}
+
+https://safe-waters-52516.herokuapp.com/api/cadastrar-pj/salvar
+
 
 http://localhost:8080/auth
 
