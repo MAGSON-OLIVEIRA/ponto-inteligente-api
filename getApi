@@ -1,5 +1,7 @@
-chamadas. api
+ Documentação todos os endpointes 
+http://localhost:8080/v2/api-docs
 
+chamadas. api
 put http://localhost:8080/app/funcionarios/2
 {
   "nome": "Teste teste",
