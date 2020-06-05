@@ -12,15 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mdo.pontointeligente.api.dto.CadastroPJDto;
-import com.mdo.pontointeligente.api.dto.EmpresaDto;
 import com.mdo.pontointeligente.api.entities.Empresa;
 import com.mdo.pontointeligente.api.entities.Funcionario;
 import com.mdo.pontointeligente.api.enums.PerfilEnum;
@@ -31,7 +28,7 @@ import com.mdo.pontointeligente.api.utils.PasswordUtils;
 
 @RestController
 @RequestMapping("/api/cadastrar-pj")
-@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class CadastroPJController {
 	
 	private static final Logger log = LoggerFactory.getLogger(CadastroPJController.class);
