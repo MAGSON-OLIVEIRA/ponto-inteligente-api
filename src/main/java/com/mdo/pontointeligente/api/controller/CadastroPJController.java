@@ -27,7 +27,7 @@ import com.mdo.pontointeligente.api.services.FuncionarioService;
 import com.mdo.pontointeligente.api.utils.PasswordUtils;
 
 @RestController
-@RequestMapping("/api/cadastrar-pj")
+@RequestMapping("/api/cadastro-pj")
 @CrossOrigin(origins = "*")
 public class CadastroPJController {
 	
