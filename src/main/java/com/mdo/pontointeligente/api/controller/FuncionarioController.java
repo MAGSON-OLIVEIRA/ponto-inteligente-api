@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mdo.pontointeligente.api.dto.FuncionarioDto;
+import com.mdo.pontointeligente.api.dto.LancamentoDto;
 import com.mdo.pontointeligente.api.entities.Funcionario;
 import com.mdo.pontointeligente.api.response.Response;
 import com.mdo.pontointeligente.api.services.FuncionarioService;
@@ -62,6 +64,19 @@ public class FuncionarioController {
 		
 		return ResponseEntity.ok(response);
 	}
+	
+	
+	@GetMapping(value="/{email}")
+	public ResponseEntity<Response<FuncionarioDto>> listarPorId(@PathVariable("email") String email){
+		log.info("Consulta de funcionario: {}", email);
+		Response<FuncionarioDto> response = new Response<FuncionarioDto>();
+		
+		Optional<Funcionario> funcionario = this.funcionarioService.findByEmail(email);
+		
+		response.setData(this.converterFuncionarioDto(funcionario.get()));
+		
+		return ResponseEntity.ok(response);
+	}
 
 	private FuncionarioDto converterFuncionarioDto(Funcionario funcionario) {
 		FuncionarioDto dto = new FuncionarioDto();
@@ -76,6 +91,7 @@ public class FuncionarioController {
 		
 		funcionario.getValorHoraOpt()
 				.ifPresent(val -> dto.setValorHora(Optional.of(val.toString())));
+		dto.setEmpresaId(funcionario.getEmpresa().getId());
 		
 		return dto;
 	}

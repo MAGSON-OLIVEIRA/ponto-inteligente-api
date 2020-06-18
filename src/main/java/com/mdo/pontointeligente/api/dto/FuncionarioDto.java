@@ -15,7 +15,9 @@ public class FuncionarioDto {
 	private Optional<String> valorHora = Optional.empty();
 	private Optional<String> qtdHorasTravalhoDia = Optional.empty();
 	private Optional<String> qtdHorasAlmoco = Optional.empty();
-
+	
+	private Long empresaId;
+	
 	public FuncionarioDto(){
 		
 	}
@@ -26,6 +28,14 @@ public class FuncionarioDto {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public Long getEmpresaId() {
+		return empresaId;
+	}
+	
+	public void setEmpresaId(Long empresaId) {
+		this.empresaId = empresaId;
 	}
 
 	@NotEmpty(message = "Nome não pode ser vazio.")
