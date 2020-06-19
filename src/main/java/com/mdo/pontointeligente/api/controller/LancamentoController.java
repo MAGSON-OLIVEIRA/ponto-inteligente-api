@@ -86,7 +86,7 @@ public class LancamentoController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping(value="/funcionario/{funcionarioEmail}")
+	@GetMapping(value="/funcionario/{funcionarioEmail}/ultimo")
 	public ResponseEntity<Response<Page<LancamentoDto>>> listarLancamentosPorEmialFuncionario(
 			@PathVariable("funcionarioEmail") String funcionarioEmail,
 			@RequestParam(value = "pag", defaultValue = "0") int pag,
