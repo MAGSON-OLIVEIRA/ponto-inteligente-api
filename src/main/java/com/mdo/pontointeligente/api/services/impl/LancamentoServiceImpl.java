@@ -59,7 +59,7 @@ public class LancamentoServiceImpl implements LancamentoService {
 	@Override
 	public Lancamento findByFuncionarioEmail(String funcionarioEmail) {
 		log.info("Buscar lançamento por id {} funcionario", funcionarioEmail);
-		String sql = "select * from lancamento l, funcionario f where l.funcionario_id = f.id and l.data_criacao = CURDATE() and f.email = '"+funcionarioEmail+"' limit 1";
+		String sql = "select * from lancamento l, funcionario f where l.funcionario_id = f.id and l.data = CURDATE() and f.email = '"+funcionarioEmail+"' limit 1";
 		Lancamento lanc =(Lancamento) manager.createNativeQuery(sql, Lancamento.class).getSingleResult();
 		return lanc;
 	}
