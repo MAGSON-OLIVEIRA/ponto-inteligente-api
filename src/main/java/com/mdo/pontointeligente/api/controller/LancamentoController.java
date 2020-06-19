@@ -86,6 +86,24 @@ public class LancamentoController {
 		return ResponseEntity.ok(response);
 	}
 	
+	@GetMapping(value="/funcionario/{funcionarioEmail}")
+	public ResponseEntity<Response<Page<LancamentoDto>>> listarLancamentosPorEmialFuncionario(
+			@PathVariable("funcionarioEmail") String funcionarioEmail,
+			@RequestParam(value = "pag", defaultValue = "0") int pag,
+			@RequestParam(value = "ord", defaultValue = "id") String ord,
+			@RequestParam(value = "dir", defaultValue = "DESC") String dir
+			
+			){
+		log.info("Buscando lancamento por email funcionario: {}, pagina {}", funcionarioEmail, pag);
+		Response<Page<LancamentoDto>> response = new Response<Page<LancamentoDto>>();
+		
+		PageRequest pageRequest = PageRequest.of(pag, this.qtdPorPagina, Direction.valueOf(dir), ord);
+		Page<Lancamento> lancamentos = this.lancamentoService.findByFuncionarioEmail(funcionarioEmail, pageRequest);
+		Page<LancamentoDto> lancamentoDto = lancamentos.map(lancamento -> this.converterLancamentoDto(lancamento));  // map 
+		response.setData(lancamentoDto);
+		return ResponseEntity.ok(response);
+	}
+	
 	/**
 	 * 
 	 * @param id

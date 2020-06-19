@@ -48,5 +48,11 @@ public class LancamentoServiceImpl implements LancamentoService {
 		log.info("Remover lançamendo id {}", id);
 		lancamentoRepository.deleteById(id);
 	}
+	
+	@Override
+	public Page<Lancamento> findByFuncionarioEmail(String funcionarioEmail, PageRequest pageable) {
+		log.info("Buscar lançamento por id {} funcionario", funcionarioEmail);
+		return lancamentoRepository.findByFuncionarioEmail(funcionarioEmail, pageable);
+	}
 
 }

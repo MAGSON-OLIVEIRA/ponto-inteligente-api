@@ -37,4 +37,12 @@ public interface LancamentoService {
 	 */
 	void remover(Long id);
 	
+	/**
+	 * 
+	 * @param funcionarioEmail
+	 * @param pageRequest
+	 * @return
+	 */
+	Page<Lancamento> findByFuncionarioEmail(String funcionarioEmail, PageRequest pageRequest);
+	
 }

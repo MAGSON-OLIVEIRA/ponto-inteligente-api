@@ -21,4 +21,6 @@ import com.mdo.pontointeligente.api.entities.Lancamento;
 public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
 	List<Lancamento> findByFuncionarioId(@Param("funcionarioId") Long funcionarioId);
 	Page<Lancamento> findByFuncionarioId(@Param("funcionarioId") Long funcionarioId, Pageable pageable);
+	Page<Lancamento> findByFuncionarioEmail(@Param("funcionarioEmail") String email, Pageable pageable);
+	
 }
