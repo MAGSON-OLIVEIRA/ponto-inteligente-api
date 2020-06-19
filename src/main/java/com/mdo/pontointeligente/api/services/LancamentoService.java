@@ -43,6 +43,6 @@ public interface LancamentoService {
 	 * @param pageRequest
 	 * @return
 	 */
-	Page<Lancamento> findByFuncionarioEmail(String funcionarioEmail, PageRequest pageRequest);
+	Lancamento findByFuncionarioEmail(String funcionarioEmail);
 	
 }
