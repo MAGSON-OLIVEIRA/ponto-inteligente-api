@@ -2,7 +2,10 @@ package com.mdo.pontointeligente.api.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import javax.validation.Valid;
 
@@ -91,8 +94,7 @@ public class LancamentoController {
 			@PathVariable("funcionarioEmail") String funcionarioEmail){
 		log.info("Buscando lancamento por email funcionario: {}, pagina {}", funcionarioEmail);
 		Response<LancamentoDto> response = new Response<LancamentoDto>();
-
-		Lancamento lancamento = this.lancamentoService.findByFuncionarioEmail(funcionarioEmail).get(0);
+		Lancamento lancamento = this.lancamentoService.findByFuncionarioEmail(funcionarioEmail);
 		LancamentoDto lancamentoDto =  this.converterLancamentoDto(lancamento);  // map 
 		response.setData(lancamentoDto);
 		return ResponseEntity.ok(response);

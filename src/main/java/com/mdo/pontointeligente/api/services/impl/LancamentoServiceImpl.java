@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +27,7 @@ public class LancamentoServiceImpl implements LancamentoService {
 	@Autowired
 	private LancamentoRepository lancamentoRepository;
 	
-	@Autowired
+	@PersistenceContext
 	private EntityManager manager;
 
 	@Override
@@ -56,9 +57,10 @@ public class LancamentoServiceImpl implements LancamentoService {
 	}
 	
 	@Override
-	public List<Lancamento> findByFuncionarioEmail(String funcionarioEmail) {
+	public Lancamento findByFuncionarioEmail(String funcionarioEmail) {
 		log.info("Buscar lançamento por id {} funcionario", funcionarioEmail);
-		return lancamentoRepository.findByFuncionarioEmail(funcionarioEmail);
+		String sql = "select * from lancamento l, funcionario f where l.funcionario_id = f.id and l.data_criacao = CURDATE() and f.email = '"+funcionarioEmail+"' limit 1";
+		Lancamento lanc =(Lancamento) manager.createNativeQuery(sql, Lancamento.class).getSingleResult();
+		return lanc;
 	}
-
 }
