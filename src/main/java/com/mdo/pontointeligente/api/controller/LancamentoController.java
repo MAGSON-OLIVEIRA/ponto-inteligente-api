@@ -92,7 +92,7 @@ public class LancamentoController {
 		log.info("Buscando lancamento por email funcionario: {}, pagina {}", funcionarioEmail);
 		Response<LancamentoDto> response = new Response<LancamentoDto>();
 
-		Lancamento lancamento = this.lancamentoService.findByFuncionarioEmail(funcionarioEmail);
+		Lancamento lancamento = this.lancamentoService.findByFuncionarioEmail(funcionarioEmail).get(0);
 		LancamentoDto lancamentoDto =  this.converterLancamentoDto(lancamento);  // map 
 		response.setData(lancamentoDto);
 		return ResponseEntity.ok(response);

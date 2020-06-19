@@ -16,11 +16,11 @@ import com.mdo.pontointeligente.api.entities.Lancamento;
 @Transactional(readOnly = true)
 @NamedQueries({
 	@NamedQuery(name="LancamentoRepository.findByFuncionarioId", query = "Select lanc from Lancamento lanc where lanc.funcionario.id = :funcionarioId"),
-	@NamedQuery(name="LancamentoRepository.findByFuncionarioEmail", query = "Select lanc from Lancamento lanc where lanc.funcionario.email = funcionarioEmail limit 1")
+	@NamedQuery(name="LancamentoRepository.findByFuncionarioEmail", query = "Select lanc from Lancamento lanc where lanc.funcionario.email = funcionarioEmail")
 })
 public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
 	List<Lancamento> findByFuncionarioId(@Param("funcionarioId") Long funcionarioId);
 	Page<Lancamento> findByFuncionarioId(@Param("funcionarioId") Long funcionarioId, Pageable pageable);
-	//Lancamento findByFuncionarioEmail(@Param("funcionarioEmail") String email);
+	List<Lancamento> findByFuncionarioEmail(@Param("funcionarioEmail") String email);
 	
 }

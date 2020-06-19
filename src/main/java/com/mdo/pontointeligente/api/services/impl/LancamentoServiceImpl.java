@@ -1,9 +1,9 @@
 package com.mdo.pontointeligente.api.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,11 +56,9 @@ public class LancamentoServiceImpl implements LancamentoService {
 	}
 	
 	@Override
-	public Lancamento findByFuncionarioEmail(String funcionarioEmail) {
+	public List<Lancamento> findByFuncionarioEmail(String funcionarioEmail) {
 		log.info("Buscar lançamento por id {} funcionario", funcionarioEmail);
-		Query query = manager.createNativeQuery("SELECT * FROM lancamento l, funcionario f WHERE l.data_criacao = CURDATE() and f.email = ? LIMIT 1");
-		query.setParameter(1, funcionarioEmail);
-		return (Lancamento) query.getSingleResult();
+		return lancamentoRepository.findByFuncionarioEmail(funcionarioEmail);
 	}
 
 }

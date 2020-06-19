@@ -1,5 +1,6 @@
 package com.mdo.pontointeligente.api.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -43,6 +44,6 @@ public interface LancamentoService {
 	 * @param pageRequest
 	 * @return
 	 */
-	Lancamento findByFuncionarioEmail(String funcionarioEmail);
+	List<Lancamento> findByFuncionarioEmail(String funcionarioEmail);
 	
 }
